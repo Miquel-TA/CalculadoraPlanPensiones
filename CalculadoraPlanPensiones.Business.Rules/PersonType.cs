@@ -16,24 +16,5 @@ namespace CalculadoraPlanPensiones.BusinessRules
             this.Autonomo = autonomo;
             this.Empleado = empleado;
         }
-
-        public override string ToString()
-        {
-            StringBuilder result = new StringBuilder();
-                
-            result.Append("Persona Fisica, ");
-
-            if (this.Autonomo)
-            {
-                result.Append("Autonomo, ");
-            }
-
-            if (this.Empleado)
-            {
-                result.Append("Empleado, ");
-            }
-
-            return result.ToString();
-        }
     }
 }

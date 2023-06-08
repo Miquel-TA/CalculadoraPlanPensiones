@@ -35,11 +35,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.AutonomoCheckbox = new System.Windows.Forms.CheckBox();
             this.EmpleadoCheckbox = new System.Windows.Forms.CheckBox();
+            this.calcularWCFbutton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CalcularButton
             // 
-            this.CalcularButton.Location = new System.Drawing.Point(119, 205);
+            this.CalcularButton.Location = new System.Drawing.Point(44, 190);
             this.CalcularButton.Name = "CalcularButton";
             this.CalcularButton.Size = new System.Drawing.Size(75, 23);
             this.CalcularButton.TabIndex = 0;
@@ -49,14 +50,14 @@
             // 
             // InversionText
             // 
-            this.InversionText.Location = new System.Drawing.Point(190, 80);
+            this.InversionText.Location = new System.Drawing.Point(161, 98);
             this.InversionText.Name = "InversionText";
             this.InversionText.Size = new System.Drawing.Size(100, 22);
             this.InversionText.TabIndex = 1;
             // 
             // SalarioText
             // 
-            this.SalarioText.Location = new System.Drawing.Point(33, 80);
+            this.SalarioText.Location = new System.Drawing.Point(38, 98);
             this.SalarioText.Name = "SalarioText";
             this.SalarioText.Size = new System.Drawing.Size(100, 22);
             this.SalarioText.TabIndex = 3;
@@ -64,7 +65,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 45);
+            this.label1.Location = new System.Drawing.Point(38, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 16);
             this.label1.TabIndex = 4;
@@ -73,7 +74,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(178, 45);
+            this.label2.Location = new System.Drawing.Point(155, 69);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(121, 16);
             this.label2.TabIndex = 5;
@@ -82,7 +83,7 @@
             // AutonomoCheckbox
             // 
             this.AutonomoCheckbox.AutoSize = true;
-            this.AutonomoCheckbox.Location = new System.Drawing.Point(119, 135);
+            this.AutonomoCheckbox.Location = new System.Drawing.Point(38, 139);
             this.AutonomoCheckbox.Name = "AutonomoCheckbox";
             this.AutonomoCheckbox.Size = new System.Drawing.Size(90, 20);
             this.AutonomoCheckbox.TabIndex = 6;
@@ -92,18 +93,29 @@
             // EmpleadoCheckbox
             // 
             this.EmpleadoCheckbox.AutoSize = true;
-            this.EmpleadoCheckbox.Location = new System.Drawing.Point(119, 162);
+            this.EmpleadoCheckbox.Location = new System.Drawing.Point(169, 139);
             this.EmpleadoCheckbox.Name = "EmpleadoCheckbox";
             this.EmpleadoCheckbox.Size = new System.Drawing.Size(92, 20);
             this.EmpleadoCheckbox.TabIndex = 7;
             this.EmpleadoCheckbox.Text = "Empleado";
             this.EmpleadoCheckbox.UseVisualStyleBackColor = true;
             // 
+            // calcularWCFbutton
+            // 
+            this.calcularWCFbutton.Location = new System.Drawing.Point(154, 190);
+            this.calcularWCFbutton.Name = "calcularWCFbutton";
+            this.calcularWCFbutton.Size = new System.Drawing.Size(120, 23);
+            this.calcularWCFbutton.TabIndex = 8;
+            this.calcularWCFbutton.Text = "CalcularWCF";
+            this.calcularWCFbutton.UseVisualStyleBackColor = true;
+            this.calcularWCFbutton.Click += new System.EventHandler(this.calcularWCFbutton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(323, 240);
+            this.ClientSize = new System.Drawing.Size(323, 271);
+            this.Controls.Add(this.calcularWCFbutton);
             this.Controls.Add(this.EmpleadoCheckbox);
             this.Controls.Add(this.AutonomoCheckbox);
             this.Controls.Add(this.label2);
@@ -128,6 +140,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox AutonomoCheckbox;
         private System.Windows.Forms.CheckBox EmpleadoCheckbox;
+        private System.Windows.Forms.Button calcularWCFbutton;
     }
 }
 

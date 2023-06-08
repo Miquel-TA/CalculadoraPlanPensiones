@@ -30,8 +30,36 @@ namespace CalculadoraPlanDepsiones.Presentation
                 Calculations calculator = new Calculations(personType, salary);
 
                 decimal haciendaReturnedMoney = calculator.Calculate(inversion);
-                MessageBox.Show($"Has invertido {inversion:0.##} como {personType.ToString()}teniendo un sueldo anual de {salary:0.##}, por lo que hacienda te ha devuelto: {haciendaReturnedMoney:0.##}.");
+                MessageBox.Show($"Has invertido {inversion:0.##} como teniendo un sueldo anual de {salary:0.##}, por lo que hacienda te ha devuelto: {haciendaReturnedMoney:0.##}.");
             } 
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void calcularWCFbutton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal inversion = Decimal.Parse(InversionText.Text);
+                decimal salary = Decimal.Parse(SalarioText.Text);
+
+                bool autonomo = AutonomoCheckbox.Checked;
+                bool empleado = EmpleadoCheckbox.Checked;
+
+                WCFService.IService service = new WCFService.ServiceClient();
+                decimal haciendaReturnedMoney = service.CalculateDesgravacionInversion(autonomo, empleado, salary, inversion);
+                
+                if (haciendaReturnedMoney > 0)
+                {
+                    MessageBox.Show($"Has invertido {inversion:0.##} como teniendo un sueldo anual de {salary:0.##}, por lo que hacienda te ha devuelto: {haciendaReturnedMoney:0.##}.");
+                }
+                else
+                {
+                    MessageBox.Show($"WCF ha devuelto {haciendaReturnedMoney}, revisa que los valores sean correctos.");
+                }
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
