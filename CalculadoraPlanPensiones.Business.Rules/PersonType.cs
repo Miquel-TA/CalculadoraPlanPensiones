@@ -8,13 +8,15 @@ namespace CalculadoraPlanPensiones.BusinessRules
 {
     public class PersonType
     {
-        public bool Autonomo { get; }
-        public bool Empleado { get; }
+        public bool Autonomo { get; set; }
+        public bool Empleado { get; set; }
+        public decimal Salary { get; set; }
 
-        public PersonType(bool autonomo, bool empleado)
+        public PersonType(bool autonomo, bool empleado, decimal Salary)
         {
             this.Autonomo = autonomo;
             this.Empleado = empleado;
+            this.Salary = Salary;
         }
     }
 }

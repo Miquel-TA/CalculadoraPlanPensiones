@@ -26,11 +26,26 @@ namespace CalculadoraPlanDepsiones.Presentation
                 bool autonomo = AutonomoCheckbox.Checked;
                 bool empleado = EmpleadoCheckbox.Checked;
 
-                PersonType personType = new PersonType(autonomo, empleado);
-                Calculations calculator = new Calculations(personType, salary);
+                PersonType personType = new PersonType(autonomo, empleado, salary);
+                Calculations calculator = new Calculations(personType);
 
                 decimal haciendaReturnedMoney = calculator.Calculate(inversion);
-                MessageBox.Show($"Has invertido {inversion:0.##} como teniendo un sueldo anual de {salary:0.##}, por lo que hacienda te ha devuelto: {haciendaReturnedMoney:0.##}.");
+
+                switch (haciendaReturnedMoney)
+                {
+                    case -1m:
+                        MessageBox.Show($"Has superado tu límite de inversión correspondiente a tu tipo de persona.");
+                        break;
+                    case -2m:
+                        MessageBox.Show($"El salario es incorrecto.");
+                        break;
+                    case -3m:
+                        MessageBox.Show("Excepción en el cálculo, revisa los valores introducidos.");
+                        break;
+                    default:
+                        MessageBox.Show($"Has invertido {inversion:0.##} como teniendo un sueldo anual de {salary:0.##}, por lo que hacienda te ha devuelto: {haciendaReturnedMoney:0.##}.");
+                        break;
+                }
             } 
             catch (Exception ex)
             {
@@ -49,15 +64,32 @@ namespace CalculadoraPlanDepsiones.Presentation
                 bool empleado = EmpleadoCheckbox.Checked;
 
                 WCFService.IService service = new WCFService.ServiceClient();
-                decimal haciendaReturnedMoney = service.CalculateDesgravacionInversion(autonomo, empleado, salary, inversion);
+
+                // Inicializar PersonType enviando parámetros al constructor no es posible?
+                // WCFService.PersonType personType = new WCFService.PersonType(autonomo, empleado, salary);
+                WCFService.PersonType personType = new WCFService.PersonType
+                {
+                    Autonomo = autonomo,
+                    Empleado = empleado,
+                    Salary = salary
+                };
+
+                decimal haciendaReturnedMoney = service.CalculateDesgravacionInversion(personType, inversion);
                 
-                if (haciendaReturnedMoney > 0)
+                switch (haciendaReturnedMoney)
                 {
-                    MessageBox.Show($"Has invertido {inversion:0.##} como teniendo un sueldo anual de {salary:0.##}, por lo que hacienda te ha devuelto: {haciendaReturnedMoney:0.##}.");
-                }
-                else
-                {
-                    MessageBox.Show($"WCF ha devuelto {haciendaReturnedMoney}, revisa que los valores sean correctos.");
+                    case -1m:
+                        MessageBox.Show($"Has superado tu límite de inversión correspondiente a tu tipo de persona.");
+                        break;
+                    case -2m:
+                        MessageBox.Show($"El salario es incorrecto.");
+                        break;
+                    case -3m:
+                        MessageBox.Show("Excepción en el cálculo, revisa los valores introducidos.");
+                        break;
+                    default:
+                        MessageBox.Show($"Has invertido {inversion:0.##} como teniendo un sueldo anual de {salary:0.##}, por lo que hacienda te ha devuelto: {haciendaReturnedMoney:0.##}.");
+                        break;
                 }
             }
             catch (Exception ex)

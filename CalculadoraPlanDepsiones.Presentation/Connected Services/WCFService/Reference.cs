@@ -15,18 +15,21 @@ namespace CalculadoraPlanDepsiones.Presentation.WCFService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PersonType", Namespace="http://schemas.datacontract.org/2004/07/")]
     [System.SerializableAttribute()]
-    public partial class CompositeType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class PersonType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool BoolValueField;
+        private bool AutonomoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StringValueField;
+        private bool EmpleadoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal SalaryField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -39,27 +42,40 @@ namespace CalculadoraPlanDepsiones.Presentation.WCFService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool BoolValue {
+        public bool Autonomo {
             get {
-                return this.BoolValueField;
+                return this.AutonomoField;
             }
             set {
-                if ((this.BoolValueField.Equals(value) != true)) {
-                    this.BoolValueField = value;
-                    this.RaisePropertyChanged("BoolValue");
+                if ((this.AutonomoField.Equals(value) != true)) {
+                    this.AutonomoField = value;
+                    this.RaisePropertyChanged("Autonomo");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StringValue {
+        public bool Empleado {
             get {
-                return this.StringValueField;
+                return this.EmpleadoField;
             }
             set {
-                if ((object.ReferenceEquals(this.StringValueField, value) != true)) {
-                    this.StringValueField = value;
-                    this.RaisePropertyChanged("StringValue");
+                if ((this.EmpleadoField.Equals(value) != true)) {
+                    this.EmpleadoField = value;
+                    this.RaisePropertyChanged("Empleado");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Salary {
+            get {
+                return this.SalaryField;
+            }
+            set {
+                if ((this.SalaryField.Equals(value) != true)) {
+                    this.SalaryField = value;
+                    this.RaisePropertyChanged("Salary");
                 }
             }
         }
@@ -78,23 +94,17 @@ namespace CalculadoraPlanDepsiones.Presentation.WCFService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WCFService.IService")]
     public interface IService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetData", ReplyAction="http://tempuri.org/IService/GetDataResponse")]
-        string GetData(int value);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Echo", ReplyAction="http://tempuri.org/IService/EchoResponse")]
+        string Echo(int value);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetData", ReplyAction="http://tempuri.org/IService/GetDataResponse")]
-        System.Threading.Tasks.Task<string> GetDataAsync(int value);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CalculateDesgravacionInversion", ReplyAction="http://tempuri.org/IService/CalculateDesgravacionInversionResponse")]
-        decimal CalculateDesgravacionInversion(bool autonomo, bool empleado, decimal salary, decimal inversion);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/Echo", ReplyAction="http://tempuri.org/IService/EchoResponse")]
+        System.Threading.Tasks.Task<string> EchoAsync(int value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CalculateDesgravacionInversion", ReplyAction="http://tempuri.org/IService/CalculateDesgravacionInversionResponse")]
-        System.Threading.Tasks.Task<decimal> CalculateDesgravacionInversionAsync(bool autonomo, bool empleado, decimal salary, decimal inversion);
+        decimal CalculateDesgravacionInversion(CalculadoraPlanDepsiones.Presentation.WCFService.PersonType personType, decimal investment);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService/GetDataUsingDataContractResponse")]
-        CalculadoraPlanDepsiones.Presentation.WCFService.CompositeType GetDataUsingDataContract(CalculadoraPlanDepsiones.Presentation.WCFService.CompositeType composite);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<CalculadoraPlanDepsiones.Presentation.WCFService.CompositeType> GetDataUsingDataContractAsync(CalculadoraPlanDepsiones.Presentation.WCFService.CompositeType composite);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/CalculateDesgravacionInversion", ReplyAction="http://tempuri.org/IService/CalculateDesgravacionInversionResponse")]
+        System.Threading.Tasks.Task<decimal> CalculateDesgravacionInversionAsync(CalculadoraPlanDepsiones.Presentation.WCFService.PersonType personType, decimal investment);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -124,28 +134,20 @@ namespace CalculadoraPlanDepsiones.Presentation.WCFService {
                 base(binding, remoteAddress) {
         }
         
-        public string GetData(int value) {
-            return base.Channel.GetData(value);
+        public string Echo(int value) {
+            return base.Channel.Echo(value);
         }
         
-        public System.Threading.Tasks.Task<string> GetDataAsync(int value) {
-            return base.Channel.GetDataAsync(value);
+        public System.Threading.Tasks.Task<string> EchoAsync(int value) {
+            return base.Channel.EchoAsync(value);
         }
         
-        public decimal CalculateDesgravacionInversion(bool autonomo, bool empleado, decimal salary, decimal inversion) {
-            return base.Channel.CalculateDesgravacionInversion(autonomo, empleado, salary, inversion);
+        public decimal CalculateDesgravacionInversion(CalculadoraPlanDepsiones.Presentation.WCFService.PersonType personType, decimal investment) {
+            return base.Channel.CalculateDesgravacionInversion(personType, investment);
         }
         
-        public System.Threading.Tasks.Task<decimal> CalculateDesgravacionInversionAsync(bool autonomo, bool empleado, decimal salary, decimal inversion) {
-            return base.Channel.CalculateDesgravacionInversionAsync(autonomo, empleado, salary, inversion);
-        }
-        
-        public CalculadoraPlanDepsiones.Presentation.WCFService.CompositeType GetDataUsingDataContract(CalculadoraPlanDepsiones.Presentation.WCFService.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContract(composite);
-        }
-        
-        public System.Threading.Tasks.Task<CalculadoraPlanDepsiones.Presentation.WCFService.CompositeType> GetDataUsingDataContractAsync(CalculadoraPlanDepsiones.Presentation.WCFService.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContractAsync(composite);
+        public System.Threading.Tasks.Task<decimal> CalculateDesgravacionInversionAsync(CalculadoraPlanDepsiones.Presentation.WCFService.PersonType personType, decimal investment) {
+            return base.Channel.CalculateDesgravacionInversionAsync(personType, investment);
         }
     }
 }
