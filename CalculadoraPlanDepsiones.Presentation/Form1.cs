@@ -67,6 +67,7 @@ namespace CalculadoraPlanDepsiones.Presentation
 
                 // Inicializar PersonType enviando parámetros al constructor no es posible?
                 // WCFService.PersonType personType = new WCFService.PersonType(autonomo, empleado, salary);
+
                 WCFService.PersonType personType = new WCFService.PersonType
                 {
                     Autonomo = autonomo,
@@ -84,9 +85,6 @@ namespace CalculadoraPlanDepsiones.Presentation
                     case -2m:
                         MessageBox.Show($"El salario es incorrecto.");
                         break;
-                    case -3m:
-                        MessageBox.Show("Excepción en el cálculo, revisa los valores introducidos.");
-                        break;
                     default:
                         MessageBox.Show($"Has invertido {inversion:0.##} como teniendo un sueldo anual de {salary:0.##}, por lo que hacienda te ha devuelto: {haciendaReturnedMoney:0.##}.");
                         break;
@@ -94,7 +92,7 @@ namespace CalculadoraPlanDepsiones.Presentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Excepción en el cálculo, revisa los valores introducidos.");
             }
         }
     }
